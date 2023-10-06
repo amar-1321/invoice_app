@@ -1,0 +1,115 @@
+/* header.css */
+
+/* Navbar styles */
+.navbar {
+  background-color: transparent;
+  color: rgb(19, 12, 12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Logo styles */
+.nav-logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+/* Navigation list styles */
+.nav-list {
+  list-style: none;
+  padding-top: 10px;
+  display: flex;
+}
+
+.nav-list li {
+  margin-right: 50px;
+ 
+}
+
+.nav-list .headLink {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(15, 12, 12);
+  transition: color 0.3s;
+
+}
+
+.nav-list a:hover {
+  color: #ffc107; /* Change the color on hover */
+}
+
+/* Dropdown menu styles */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f7f7f7;
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block; /* Show the dropdown on hover */
+}
+
+.dropdown-content .dl {
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  text-align:justify;
+}
+
+.dropdown-content .dla {
+  text-decoration: none;
+  color: rgb(37, 37, 37);
+  transition: color 0.3s;
+  font-weight: bolder;
+  font-size: 15px;
+  
+}
+
+.dropdown-content a:hover {
+  color: #ffc107; /* Change the color on hover */
+}
+
+/* User menu styles */
+.nav-list-comp-2 {
+  display: flex;
+  align-items: center;
+}
+
+/* User menu button styles */
+.dropdown-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.dropdown-button:hover {
+  color: #ffc107; /* Change the color on hover */
+}
+
+/* Add more styles as needed for your specific design */
+
+/* Responsive styles (adjust as needed) */
+@media (max-width: 768px) {
+  .nav-list {
+    display: none; /* Hide the navigation list on small screens */
+  }
+
+  .nav-list-comp-2 {
+    margin-left: auto;
+  }
+}

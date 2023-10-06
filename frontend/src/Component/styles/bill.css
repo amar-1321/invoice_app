@@ -1,0 +1,157 @@
+/* bill.css */
+
+/* Style for the header */
+
+  
+  /* Style for the main content */
+  .mainbill {
+    width: 95%;
+    height: 65vh;
+    max-height:65vh;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+    border: 1px solid rgb(158, 157, 157);
+  }
+  
+  /* Style for the table */
+  .tables {
+    width: 85%;
+    max-width: 85%;
+    border-collapse: collapse;
+    border-radius: 0px;
+  }
+
+  .tables th{
+   text-align: center;
+   font-size: 15px;
+   font-weight: 600;
+  }
+  .tables td {
+    padding: 0px;
+    text-align: center;
+   border:1px solid #a8a8a8;
+  }
+  
+
+  /* Add more specific styling for individual elements as needed */
+  
+  /* Style for the Delete button */
+  .hidelink {
+    text-align: right;
+    height: 28px;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ccc;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+
+.heading-bill {
+    height: 30px;
+    background: #F9FAFC;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: -8px;
+    border-bottom:1px solid #a8a8a8;
+}
+
+.head_text{
+   
+    font-size: 15px;
+    font-weight: 700;
+}
+.bill-form{
+    display: block;
+    width: 100%;
+    height: 63vh;
+    min-width: 786px;
+}
+.panel-body{
+    width: 80%;
+    height: 466px;
+    display: flex;
+    margin-top: 4px;
+    margin-left: 6px;
+    justify-content: space-between;
+}
+.column{
+   padding:5px;
+}
+.bill-table{
+ width:70%;
+ flex: 66%;
+ border: 1px solid rgb(150, 150, 150);
+ height: 400px;
+ 
+}
+.tables{
+  margin-top: -6px;
+}
+.bill-sub{
+  flex: 40%;
+}
+  
+.bill-button-comp{
+ display: flex;
+ justify-content: flex-end;
+ padding: 1px;
+ margin-top: 20px;
+ 
+}
+.bill-button{
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background: rgb(33, 109, 250);
+  font-size: 15px;
+  margin-right: 25px;
+  margin-top: 8px;
+  color: aliceblue;
+  border-radius: 17px;
+  border: none;
+}
+  /* Add more styles for other elements */
+
+  .ui-autocomplete {
+    position: absolute;
+    cursor: default;
+    overflow-y: auto;
+    max-height: 350px;
+  }
+
+  #ctxmenu {
+    position: fixed;
+    background: ghostwhite;
+    color: black;
+    cursor: pointer;
+   
+  }
+
+
+  .heading_bill{
+    width: "100%"; 
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color:hwb(0 96% 3%) ;
+    box-shadow:inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .head-text{
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: 20px;
+  }
+
+  
