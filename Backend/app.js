@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv');
 const path = require('path')
 
-dotenv.config({path:path.join(__dirname,"config/config.env")})
+dotenv.config({path:path.join(__dirname,"config.env")})
 
 const app = express();
 const SECRET_KEY = process.env.SECRET_KEY;
