@@ -1269,7 +1269,7 @@ res.status(200).json({ message: 'bill data and stock updates saved successfully'
 
 
 });
-
+db.end();
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
