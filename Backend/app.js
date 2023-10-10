@@ -157,7 +157,7 @@ app.get('/fetchuser', (req, res) => {
     } else {
       
       res.json(results);
-      db.end();
+      
     }
   });
 });
