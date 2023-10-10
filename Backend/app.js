@@ -113,7 +113,6 @@ app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Check if the username exists in the database
     const results = await new Promise((resolve, reject) => {
       db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
         if (err) {
@@ -144,9 +143,15 @@ app.post('/login', async (req, res) => {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   } finally {
-    db.end();
+    try {
+      db.end();
+    } catch (err) {
+      // Handle any errors that may occur when closing the database connection
+      console.error('Error closing database connection:', err);
+    }
   }
 });
+
 
 
 
