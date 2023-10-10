@@ -142,14 +142,7 @@ app.post('/login', async (req, res) => {
 
   } catch (err) {
     return res.status(500).json({ error: err.message });
-  } finally {
-    try {
-      db.end();
-    } catch (err) {
-      // Handle any errors that may occur when closing the database connection
-      console.error('Error closing database connection:', err);
-    }
-  }
+  } 
 });
 
 
