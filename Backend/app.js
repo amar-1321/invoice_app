@@ -73,6 +73,7 @@ app.post('/register', (req, res) => {
       // Create and return a JWT token for the newly registered user
       const token = jwt.sign({ userId: insertResults.insertId, isAdmin }, 'your-secret-key', { expiresIn: '1h' });
       res.status(201).json({ token });
+      
     });
   });
 });
@@ -104,6 +105,7 @@ app.post('/login', (req, res) => {
     // If username and password are correct, create and return a JWT token
     const token = jwt.sign({ userId: user.id, isAdmin }, SECRET_KEY, { expiresIn: '1h' });
     res.status(200).json({ token, isAdmin});
+    db.end();
   });
 });
 
@@ -153,6 +155,7 @@ app.get('/fetchuser', (req, res) => {
     } else {
       
       res.json(results);
+      db.end();
     }
   });
 });
@@ -1269,7 +1272,7 @@ res.status(200).json({ message: 'bill data and stock updates saved successfully'
 
 
 });
-db.end();
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
