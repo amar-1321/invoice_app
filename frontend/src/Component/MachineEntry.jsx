@@ -3,6 +3,8 @@ import arrowIcon from './icon/icons8-arrow-28.png';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { API_URL } from './config/config';
+
 
 
 function MachineEntry() {
@@ -205,9 +207,9 @@ function MachineEntry() {
         height:'40px',
       };
 
-      const apiUrl = 'http://localhost:4001';
+      
       const fetchCategoryData = () => {
-        axios.get(`${apiUrl}/fetchcategory`)
+        axios.get(`${API_URL}/fetchcategory`)
           .then(response => {
             setCategory(response.data);
           })
@@ -674,7 +676,7 @@ function MachineEntry() {
 
     const handleSubmit = () =>{
       console.log(machineData);
-      axios.put('http://localhost:4001/updateMachineStock',{
+      axios.put(`${API_URL}/updateMachineStock`,{
         data: machineData,
         ...machinDate
       })
@@ -748,7 +750,7 @@ function MachineEntry() {
 
             if (query.length > 0) {
               // Make an API request to get suggestions
-              axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+              axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
                 .then((response) => {
                  
                   setSuggestions1(response.data);
@@ -779,7 +781,7 @@ function MachineEntry() {
           cabinet_name: cabinets,
         }));
   
-        axios.get('http://localhost:4001/machinePrice', {params:{itemName:cabinets}})
+        axios.get(`${API_URL}/machinePrice`, {params:{itemName:cabinets}})
         .then((response) => {
 
           setCabinetPrice(response.data[0].dealer);
@@ -814,7 +816,7 @@ function MachineEntry() {
 
             if (query.length > 0) {
               // Make an API request to get suggestions
-              axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+              axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
                 .then((response) => {
                   setSuggestions2(response.data);
                   setSuggestionsActive2(true);
@@ -843,7 +845,7 @@ function MachineEntry() {
           pump_name: pump,
         }));
 
-        axios.get('http://localhost:4001/machinePrice', {params:{itemName:pump}})
+        axios.get(`${API_URL}/machinePrice`, {params:{itemName:pump}})
         .then((response) => {
 
           setPumpPrice(response.data[0].dealer );
@@ -880,7 +882,7 @@ function MachineEntry() {
 
             if (query.length > 0) {
               // Make an API request to get suggestions
-              axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+              axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
                 .then((response) => {
                  
                   setSuggestions3(response.data);
@@ -910,7 +912,7 @@ function MachineEntry() {
         }));
         
       
-        axios.get('http://localhost:4001/machinePrice', {params:{itemName:pumpElbow}})
+        axios.get(`${API_URL}/machinePrice`, {params:{itemName:pumpElbow}})
         .then((response) => {
 
           setPumpElbowPrice(response.data[0].dealer);
@@ -947,7 +949,7 @@ function MachineEntry() {
 
             if (query.length > 0) {
               // Make an API request to get suggestions
-              axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+              axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
                 .then((response) => {
                  
                   setSuggestions4(response.data);
@@ -979,7 +981,7 @@ function MachineEntry() {
           pumpPlate_name: pumpPlate,
         }));
         
-        axios.get('http://localhost:4001/machinePrice', {params:{itemName:pumpPlate}})
+        axios.get(`${API_URL}/machinePrice`, {params:{itemName:pumpPlate}})
         .then((response) => {
 
           setPumpPlatePrice(response.data[0].dealer);
@@ -1016,7 +1018,7 @@ function MachineEntry() {
 
             if (query.length > 0) {
               // Make an API request to get suggestions
-              axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+              axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
                 .then((response) => {
                  
                   setSuggestions5(response.data);
@@ -1046,7 +1048,7 @@ function MachineEntry() {
           sv_name: sv,
         }));
         
-        axios.get('http://localhost:4001/machinePrice', {params:{itemName:sv}})
+        axios.get(`${API_URL}/machinePrice`, {params:{itemName:sv}})
         .then((response) => {
 
           setSvPrice(response.data[0].dealer);
@@ -1083,7 +1085,7 @@ function MachineEntry() {
 
             if (query.length > 0) {
               // Make an API request to get suggestions
-              axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+              axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
                 .then((response) => {
                  
                   setSuggestions6(response.data);
@@ -1113,7 +1115,7 @@ function MachineEntry() {
           svElbow_name: svElbow,
         }));
         
-        axios.get('http://localhost:4001/machinePrice', {params:{itemName:svElbow}})
+        axios.get(`${API_URL}/machinePrice`, {params:{itemName:svElbow}})
         .then((response) => {
 
           setSvElbowPrice(response.data[0].dealer);
@@ -1151,7 +1153,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions7(response.data);
@@ -1181,7 +1183,7 @@ function MachineEntry() {
         smps_name: smps,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:smps}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:smps}})
       .then((response) => {
          const data = response.data
         setSmpsPrice(response.data[0].dealer);
@@ -1218,7 +1220,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions8(response.data);
@@ -1248,7 +1250,7 @@ function MachineEntry() {
         preCarbon_name: preCarbon,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:preCarbon}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:preCarbon}})
       .then((response) => {
 
         setPreCarbonPrice(response.data[0].dealer);
@@ -1284,7 +1286,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions9(response.data);
@@ -1314,7 +1316,7 @@ function MachineEntry() {
         sediment_name: sediment,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:sediment}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:sediment}})
       .then((response) => {
 
         setSedimentPrice(response.data[0].dealer);
@@ -1350,7 +1352,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions10(response.data);
@@ -1380,7 +1382,7 @@ function MachineEntry() {
         postCarbon_name: postCarbon,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:postCarbon}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:postCarbon}})
       .then((response) => {
 
         setPostCarbonPrice(response.data[0].dealer);
@@ -1417,7 +1419,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions11(response.data);
@@ -1447,7 +1449,7 @@ function MachineEntry() {
         copper_name: copper,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:copper}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:copper}})
       .then((response) => {
 
         setCopperPrice(response.data[0].dealer);
@@ -1484,7 +1486,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions12(response.data);
@@ -1514,7 +1516,7 @@ function MachineEntry() {
         uv_name: uv,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:uv}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:uv}})
       .then((response) => {
 
         setUvPrice(response.data[0].dealer);
@@ -1550,7 +1552,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions13(response.data);
@@ -1580,7 +1582,7 @@ function MachineEntry() {
         uf_name: uf,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:uf}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:uf}})
       .then((response) => {
 
         setUfPrice(response.data[0].dealer);
@@ -1616,7 +1618,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions14(response.data);
@@ -1646,7 +1648,7 @@ function MachineEntry() {
         alkline_name: alkaline,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:alkaline}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:alkaline}})
       .then((response) => {
 
         setAlkalinePrice(response.data[0].dealer);
@@ -1682,7 +1684,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions15(response.data);
@@ -1712,7 +1714,7 @@ function MachineEntry() {
         doublePushElbow_name: doublePushElbow,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:doublePushElbow}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:doublePushElbow}})
       .then((response) => {
 
         setDoublePushElbowPrice(response.data[0].dealer);
@@ -1748,7 +1750,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions16(response.data);
@@ -1779,7 +1781,7 @@ function MachineEntry() {
         membraneHousing_name: membraneHousing,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:membraneHousing}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:membraneHousing}})
       .then((response) => {
 
         setMembraneHousingPrice(response.data[0].dealer);
@@ -1816,7 +1818,7 @@ function MachineEntry() {
 
           if (query.length > 0) {
             // Make an API request to get suggestions
-            axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+            axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
               .then((response) => {
                
                 setSuggestions17(response.data);
@@ -1846,7 +1848,7 @@ function MachineEntry() {
         membraneElbow_name: membraneElbow,
       }));
       
-      axios.get('http://localhost:4001/machinePrice', {params:{itemName:membraneElbow}})
+      axios.get(`${API_URL}/machinePrice`, {params:{itemName:membraneElbow}})
       .then((response) => {
 
       setMembraneElbowPrice(response.data[0].dealer);
@@ -1882,7 +1884,7 @@ const handleChange18 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions18(response.data);
@@ -1912,7 +1914,7 @@ const handleClick18 = (fr) => {
     fr_name: fr,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:fr}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:fr}})
   .then((response) => {
 
     setFrPrice(response.data[0].dealer);
@@ -1947,7 +1949,7 @@ const handleChange19 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions19(response.data);
@@ -1977,7 +1979,7 @@ const handleClick19 = (dolphinFloats) => {
     dolphinFloat_name: dolphinFloats,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:dolphinFloats}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:dolphinFloats}})
   .then((response) => {
 
     setDolphinFloatPrice(response.data[0].dealer);
@@ -2013,7 +2015,7 @@ const handleChange20 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions20(response.data);
@@ -2044,7 +2046,7 @@ const handleClick20 = (dolphin) => {
     dolphin_name: dolphin,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:dolphin}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:dolphin}})
   .then((response) => {
 
     setDolphinPrice(response.data[0].dealer);
@@ -2081,7 +2083,7 @@ const handleChange21 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions21(response.data);
@@ -2111,7 +2113,7 @@ const handleClick21 = (bulkit) => {
     bulkit_name: bulkit,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:bulkit}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:bulkit}})
   .then((response) => {
 
     setBulkitPrice(response.data[0].dealer);
@@ -2145,7 +2147,7 @@ const handleChange22 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions22(response.data);
@@ -2175,7 +2177,7 @@ const handleClick22 = (tap) => {
     tap_name: tap,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:tap}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:tap}})
   .then((response) => {
 
     setTapPrice(response.data[0].dealer);
@@ -2211,7 +2213,7 @@ const handleChange23 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions23(response.data);
@@ -2241,7 +2243,7 @@ const handleClick23 = (taflon) => {
     taflon_name: taflon,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:taflon}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:taflon}})
   .then((response) => {
 
     setTaflonPrice(response.data[0].dealer);
@@ -2277,7 +2279,7 @@ const handleChange24 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions24(response.data);
@@ -2307,7 +2309,7 @@ const handleClick24 = (tube) => {
     tube_name: tube,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:tube}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:tube}})
   .then((response) => {
 
     setTubePrice(response.data[0].dealer);
@@ -2344,7 +2346,7 @@ const handleChange25 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions25(response.data);
@@ -2374,7 +2376,7 @@ const handleClick25 = (cupLink) => {
     cupLink_name: cupLink,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:cupLink}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:cupLink}})
   .then((response) => {
 
     setCuplinkPrice(response.data[0].dealer);
@@ -2409,7 +2411,7 @@ const handleChange26 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions26(response.data);
@@ -2439,7 +2441,7 @@ const handleClick26 = (onOff) => {
     onof_name: onOff,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:onOff}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:onOff}})
   .then((response) => {
 
     setOnOfPrice(response.data[0].dealer);
@@ -2473,7 +2475,7 @@ const handleChange27 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions27(response.data);
@@ -2503,7 +2505,7 @@ const handleClick27 = (wire) => {
     wire_name: wire,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:wire}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:wire}})
   .then((response) => {
 
     setWirePrice(response.data[0].dealer);
@@ -2537,7 +2539,7 @@ const handleChange28 = (e) => {
 
       if (query.length > 0) {
         // Make an API request to get suggestions
-        axios.get(`http://localhost:4001/api/search?category=${categoryName}&itemName=${query}`)
+        axios.get(`${API_URL}/api/search?category=${categoryName}&itemName=${query}`)
           .then((response) => {
            
             setSuggestions28(response.data);
@@ -2567,7 +2569,7 @@ const handleClick28 = (clamp) => {
     clamp_name: clamp,
   }));
   
-  axios.get('http://localhost:4001/machinePrice', {params:{itemName:clamp}})
+  axios.get(`${API_URL}/machinePrice`, {params:{itemName:clamp}})
   .then((response) => {
 
     setClampPrice(response.data[0].dealer);

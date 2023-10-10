@@ -6,14 +6,15 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
+import { API_URL } from '../config/config';
 
 function AddProduct(props) {
 
-  const apiUrl = 'http://localhost:4001'; // Replace with your API URL
+ // Replace with your API URL
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get(`${apiUrl}/fetchcategory`)
+    axios.get(`${API_URL}/fetchcategory`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -43,7 +44,7 @@ function AddProduct(props) {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${apiUrl}/addproduct`, {
+      const response = await fetch(`${API_URL}/addproduct`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

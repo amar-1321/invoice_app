@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/config';
+
 
 const Register = () => {
 
@@ -23,7 +25,7 @@ const Register = () => {
     e.preventDefault();
     // You can handle form submission logic here
     try {
-        const response = await fetch('http://localhost:4001/register', {
+        const response = await fetch(`${API_URL}/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

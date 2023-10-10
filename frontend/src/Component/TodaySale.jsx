@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css"
 import "./styles/billwise.css";
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
+import { API_URL } from './config/config';
+
 
 
 const formatDate = (date) => {
@@ -104,7 +106,7 @@ const formatDate = (date) => {
 
 useEffect(() => {
    
-    axios.get('http://localhost:4001/fetchSalesBill')
+    axios.get(`${API_URL}/fetchSalesBill`)
     .then((response) => {
 
         const responseData = response.data;

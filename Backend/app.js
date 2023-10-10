@@ -23,9 +23,8 @@ const db = mysql.createConnection({
   user: process.env.DB_USERNAME,     
   password: process.env.DB_PASSWORD,  
   database: process.env.DB, 
-  waitForConnections: true,
   connectionLimit:10,
-  queueLimit: 0
+
 });
 
 
@@ -38,13 +37,8 @@ const db = mysql.createConnection({
     }
   });
 
-  app.get('/', (req, res) => {
-    res.send('connected db');
-  });
-
 
 //   login
-
 
 db.query(`
    CREATE TABLE IF NOT EXISTS users (

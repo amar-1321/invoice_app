@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
 import AddSupplier from './Modal/AddSupplier';
 import arrowIcon from './icon/icons8-arrow-28.png'
+import { API_URL } from './config/config';
+
 
 function SupplierList() {
     const [supplier, setSupplier] = useState([]);
@@ -20,7 +22,7 @@ function SupplierList() {
 
     useEffect(() => {
       // Make the API request when the component mounts
-      axios.get('http://localhost:4001/fetchsuppliers')
+      axios.get(`${API_URL}/fetchsuppliers`)
         .then(response => {
           // Handle the response by setting the data in state
           setSupplier(response.data);
@@ -39,7 +41,7 @@ function SupplierList() {
     
     
       const handleDelete = (id) => {
-        axios.delete(`http://localhost:4001/deletesupplier/${id}`)
+        axios.delete(`${API_URL}/deletesupplier/${id}`)
       .then(response => {
         console.log(response.data); // Data deleted successfully message
         // Update the supplier list after deletion
@@ -56,7 +58,7 @@ function SupplierList() {
 
       const handleUpdate = () => {
        
-        axios.put(`http://localhost:4001/updatesupplier/${selectedRow.id}`, selectedRow)
+        axios.put(`${API_URL}/updatesupplier/${selectedRow.id}`, selectedRow)
           .then(response => {
            
             setSupplier(prevsupplier =>

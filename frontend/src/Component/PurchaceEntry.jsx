@@ -7,6 +7,8 @@ import PurchaseTableRow from './PurchaseTableRow';
 import arrowIcon from './icon/icons8-arrow-28.png'
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
+import { API_URL } from './config/config';
+
 
 function PurchaceEntry() {
 
@@ -202,7 +204,7 @@ function PurchaceEntry() {
 
 
     axios
-      .post('http://localhost:4001/purchase', {
+      .post(`${API_URL}/purchase`, {
         data: nonEmptyRows,
         ...formData
 
@@ -250,18 +252,12 @@ function PurchaceEntry() {
     setQtyColumnTotal(newQtyGrandTotal);
 
 
-    // setPurchaseData((prevPurchaseData) => ({
-    //   ...prevPurchaseData,
-    //   tot_qty:newQtyGrandTotal
-    //  }))
-
-    // Add more conditions for other columns if needed
   };
 
   //  Total Item Count 
   useEffect(() => {
     // Fetch supplier names from the API
-    axios.get('http://localhost:4001/fetch/sup_name')
+    axios.get(`${API_URL}/fetch/sup_name`)
       .then(response => {
         setFilteredOptions(response.data);
       })
@@ -318,7 +314,7 @@ function PurchaceEntry() {
       setBillno(nextIdentifier);
     };
     generateUniqueNumber();
-  },[] );
+  },[billno] );
 
 
   const handleInvoiceDate = (e) => {

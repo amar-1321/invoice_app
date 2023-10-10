@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import {  Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/config';
+;
 
 const Login = ({setToken}) => {
 
@@ -45,7 +47,7 @@ const Login = ({setToken}) => {
     
         // If the form data is valid, you can proceed with the API request
         try {
-          const response = await fetch('http://localhost:4001/login', {
+          const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

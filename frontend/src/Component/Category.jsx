@@ -4,6 +4,8 @@ import axios from 'axios';
 import arrowIcon from './icon/icons8-arrow-28.png'
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
+import { API_URL } from './config/config';
+
 function Category() {
 
 
@@ -15,7 +17,7 @@ function Category() {
       navigate("/login");
     }
   }, [navigate]);
-    const apiUrl = 'http://localhost:4001'; // Replace with your API URL
+  // Replace with your API URL
 
     const [categoryData, setCategoryData] = useState({ id: null, category_name: '' });
     const [category, setCategory] = useState([]);
@@ -26,7 +28,7 @@ function Category() {
       try {
         if (categoryData.id === null) {
           
-          const response = await axios.post(`${apiUrl}/addcategory`, categoryData);
+          const response = await axios.post(`${API_URL}/addcategory`, categoryData);
           if (response.data === 'Data inserted successfully') {
             alert('Data inserted successfully');
             setCategoryData({ id: null, category_name: '' }); 
@@ -36,7 +38,7 @@ function Category() {
           }
         } else {
          
-          const response = await axios.put(`${apiUrl}/updatecategory/${categoryData.id}`, categoryData);
+          const response = await axios.put(`${API_URL}/updatecategory/${categoryData.id}`, categoryData);
           if (response.data === 'Data updated successfully') {
             alert('Data updated successfully');
             setCategoryData({ id: null, category_name: '' }); 
@@ -57,7 +59,7 @@ function Category() {
   
     const handleDeleteCategory = async (id) => {
       try {
-        const response = await axios.delete(`${apiUrl}/deletecategory/${id}`);
+        const response = await axios.delete(`${API_URL}/deletecategory/${id}`);
         if (response.data === 'Data deleted successfully') {
           alert('Data deleted successfully');
           fetchCategoryData(); 
@@ -70,7 +72,7 @@ function Category() {
     };
   
     const fetchCategoryData = () => {
-      axios.get(`${apiUrl}/fetchcategory`)
+      axios.get(`${API_URL}/fetchcategory`)
         .then(response => {
           setCategory(response.data);
         })

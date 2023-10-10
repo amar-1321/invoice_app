@@ -10,6 +10,8 @@ import withReactContent from 'sweetalert2-react-content';
 import arrowIcon from './icon/icons8-arrow-28.png'
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
+import { API_URL } from './config/config';
+
 
 function Bill() {
 
@@ -267,7 +269,7 @@ function Bill() {
     console.log("billDataRow", newData);
     console.log("billform", billForm);
     axios
-      .post('http://localhost:4001/billEntey', {
+      .post(`${API_URL}/billEntey`, {
         data: newData,
         ...billForm
       })
@@ -291,7 +293,7 @@ function Bill() {
       });
 
     axios
-      .post('http://localhost:4001/salesBillDetails', {
+      .post(`${API_URL}/salesBillDetails`, {
         ...salesBillDetails
       })
       .then(response1 => {
@@ -339,7 +341,7 @@ function Bill() {
   };
   useEffect(() => {
     // Fetch supplier names from the API
-    axios.get('http://localhost:4001/fetch/cust_name')
+    axios.get(`${API_URL}/fetch/cust_name`)
       .then(response => {
         setFilteredOptions(response.data);
       })
@@ -374,7 +376,7 @@ function Bill() {
     }));
 
     const custType = option;
-    axios.get(`http://localhost:4001/fetchCustData/${custType}`)
+    axios.get(`${API_URL}/fetchCustData/${custType}`)
       .then(response => {
 
         setCusType(response.data);

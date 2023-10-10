@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { API_URL } from './config/config';
 function Tablerow({ index, custType, rowData, updatedRowData, updateTotalValue, updateQtyColumnTotal, }) {
   const cellRefs = useRef([]);
   const totalCells = 500;
@@ -67,7 +68,7 @@ function Tablerow({ index, custType, rowData, updatedRowData, updateTotalValue, 
     setValue(query);
     if (query.length > 0) {
       // Make an API request to get suggestions
-      axios.get(`http://localhost:4001/api/suggestions?q=${query}`)
+      axios.get(`${API_URL}/api/suggestions?q=${query}`)
         .then((response) => {
           const filteredSuggestions = response.data.filter((suggestion) =>
             suggestion.toLowerCase().startsWith(query.charAt(0))
@@ -91,7 +92,7 @@ function Tablerow({ index, custType, rowData, updatedRowData, updateTotalValue, 
     if (custType && custType.cust_type) {
       const custPrice = custType.cust_type;
       const PriceProp = custPrice;
-      axios.get(`http://localhost:4001/fetchItemData/${value}`)
+      axios.get(`${API_URL}/fetchItemData/${value}`)
         .then((response) => {
           // Handle the response data as needed
           const itemData = response.data;
@@ -146,7 +147,7 @@ function Tablerow({ index, custType, rowData, updatedRowData, updateTotalValue, 
         if (custType && custType.cust_type) {
           const custPrice = custType.cust_type;
           const PriceProp = custPrice;
-          axios.get(`http://localhost:4001/fetchItemData/${selectedSuggestion} `)
+          axios.get(`${API_URL}/fetchItemData/${selectedSuggestion} `)
             .then((response) => {
               // Handle the response data as needed
               const itemData = response.data;

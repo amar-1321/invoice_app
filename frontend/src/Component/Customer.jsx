@@ -5,6 +5,8 @@ import AddCustomer from './Modal/AddCustomer';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
 import arrowIcon from './icon/icons8-arrow-28.png'
+import { API_URL } from './config/config';
+
 function Customer() {
     const [customer, setCustomer] = useState([]);
     const navigate = useNavigate();
@@ -18,7 +20,7 @@ function Customer() {
 
     useEffect(() => {
       // Make the API request when the component mounts
-      axios.get('http://localhost:4001/fetchCustomer')
+      axios.get(`${API_URL}/fetchCustomer`)
         .then(response => {
           // Handle the response by setting the data in state
           setCustomer(response.data);
@@ -36,7 +38,7 @@ function Customer() {
     
     
       const handleDelete = (id) => {
-        axios.delete(`http://localhost:4001/deleteCustomer/${id}`)
+        axios.delete(`${API_URL}/deleteCustomer/${id}`)
       .then(response => {
         console.log(response.data); // Data deleted successfully message
         // Update the customer list after deletion
@@ -53,7 +55,7 @@ function Customer() {
 
       const handleUpdate = () => {
        
-        axios.put(`http://localhost:4001/updateCustomer/${selectedRow.id}`, selectedRow)
+        axios.put(`${API_URL}/updateCustomer/${selectedRow.id}`, selectedRow)
           .then(response => {
            
             setCustomer(prevcustomer =>

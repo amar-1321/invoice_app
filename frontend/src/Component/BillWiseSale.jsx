@@ -13,6 +13,7 @@ import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
 import Scrollbars from 'rc-scrollbars';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
+import { API_URL } from './config/config';
 
 
 const formatDate = (date) => {
@@ -50,7 +51,7 @@ const formatDate = (date) => {
         console.log("modal data cusname:", CName);
         console.log("modal data date:", CDate);
     
-        const response = await axios.get('http://localhost:4001/api/billDataview', {
+        const response = await axios.get(`${API_URL}/api/billDataview`, {
           params: {
             cus_name: CName,  // No need to encode here
             date: CDate,      // No need to encode here
@@ -225,7 +226,7 @@ const formatDate = (date) => {
     
     useEffect(() => {
    
-        axios.get('http://localhost:4001/fetchBillWise')
+        axios.get(`${API_URL}/fetchBillWise`)
         .then((response) => {
     
             const responseData = response.data;

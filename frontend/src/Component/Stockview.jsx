@@ -3,12 +3,12 @@ import DataTable from 'react-data-table-component';
 import arrowIcon from './icon/icons8-arrow-28.png'
 import { utils, writeFile } from 'xlsx';
 import axios from 'axios';
-
-
 import "react-datepicker/dist/react-datepicker.css"
 import "./styles/billwise.css";
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
+import { API_URL } from './config/config';
+
 
 
  function Stockview() {
@@ -90,7 +90,7 @@ import { getToken } from '../services/api';
 
 useEffect(() => {
    
-    axios.get('http://localhost:4001/fetchStockViewData')
+    axios.get(`${API_URL}/fetchStockViewData`)
     .then((response) => {
         const responseData = response.data;
         setStockData(responseData);

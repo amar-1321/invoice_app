@@ -5,10 +5,11 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
+import { API_URL } from '../config/config';
 
 function AddSupplier(props) {
 
-    const apiUrl = 'http://localhost:4001'; // Replace with your API URL
+  // Replace with your API URL
 
     const [supplierData, setSupplierData] = useState({
         bshortName: '',
@@ -31,7 +32,7 @@ function AddSupplier(props) {
       e.preventDefault();
   
       try {
-        const response = await fetch(`${apiUrl}/addsupplier`, {
+        const response = await fetch(`${API_URL}/addsupplier`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

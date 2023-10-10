@@ -1,13 +1,3 @@
-// import React from 'react'
-
-// function StockHistory() {
-//   return (
-//     <div>StockHistory</div>
-//   )
-// }
-
-// export default StockHistory
-
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import arrowIcon from './icon/icons8-arrow-28.png'
@@ -19,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import "./styles/billwise.css";
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
-
+import { API_URL } from './config/config';
 
 const formatDate = (date) => {
     const year = date.getFullYear();
@@ -131,7 +121,7 @@ const formatDate = (date) => {
 
 useEffect(() => {
    
-    axios.get('http://localhost:4001/fetchStockHistoryData')
+    axios.get(`${API_URL}/fetchStockHistoryData`)
     .then((response) => {
 
         const responseData = response.data;

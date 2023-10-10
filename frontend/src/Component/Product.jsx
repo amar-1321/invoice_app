@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/api';
 import arrowIcon from './icon/icons8-arrow-28.png'
+import { API_URL } from './config/config';
 function Product() {
 
 
@@ -22,7 +23,7 @@ function Product() {
 
     useEffect(() => {
      
-      axios.get('http://localhost:4001/fetchProduct')
+      axios.get(`${API_URL}/fetchProduct`)
         .then(response => {
           
           setProducts(response.data);
@@ -38,11 +39,11 @@ function Product() {
     
   
     
-      const apiUrl = 'http://localhost:4001'; // Replace with your API URL
+      // Replace with your API URL
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get(`${apiUrl}/fetchcategory`)
+    axios.get(`${API_URL}/fetchcategory`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -51,7 +52,7 @@ function Product() {
       });
   }, []);
       const handleDelete = (id) => {
-        axios.delete(`http://localhost:4001/delete/${id}`)
+        axios.delete(`${API_URL}/delete/${id}`)
       .then(response => {
         console.log(response.data); // Data deleted successfully message
         // Update the products list after deletion
@@ -68,7 +69,7 @@ function Product() {
 
       const handleUpdate = () => {
         // Send a PUT request to update the product
-        axios.put(`http://localhost:4001/update/${selectedRow.id}`, selectedRow)
+        axios.put(`${API_URL}/update/${selectedRow.id}`, selectedRow)
           .then(response => {
             // Update the products list with the updated product
             setProducts(prevProducts =>
@@ -90,7 +91,7 @@ function Product() {
 
       const handleCheckboxClick = (id, isChecked) => {
         // Send a request to the server to toggle the checkbox state
-        fetch('http://localhost:4001/productcheckbox', {
+        fetch(`${API_URL}/productcheckbox`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

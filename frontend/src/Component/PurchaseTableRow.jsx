@@ -1,6 +1,8 @@
 
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
+import { API_URL } from './config/config';
+
 
 
 function PurchaseTableRow({ index, PurchaserowData, updatedRowData, data, updateTotalValue, updateQtyColumnTotal }) {
@@ -61,55 +63,6 @@ function PurchaseTableRow({ index, PurchaserowData, updatedRowData, data, update
 
 
 
-  // useEffect(() => {
-
-
-  //   if (query) {
-  //     axios.get(`http://localhost:4001/api/suggestions?q=${query}`)
-  //       .then(response => {
-  //         setSuggestions(response.data);
-  //       })
-  //       .catch(error => {
-  //         console.error('API error: ', error);
-  //       });
-  //   } else {
-  //     setSuggestions([]);
-  //   }
-
-  //   const handleClick = (event) => {
-  //     if (autocompleteRef.current && !autocompleteRef.current.contains(event.target)) {
-  //         setIsDropdownOpen(false)
-  //     }
-  // };
-  //  document.addEventListener("click", handleClick);
-  // return () => {
-  //     document.removeEventListener("click", handleClick)
-  // }
-
-
-  // }, [query]);
-
-  // const handleSuggestionClick = (itemName) => {
-  //   // console.log("click event:", itemName);
-
-  //   axios.get(`http://localhost:4001/fetchItemData/${itemName}`)
-  //     .then(response => {
-  //       setSelectedItemData(response.data);
-  //       setCode(response.data.code);
-  //       setItemName(response.data.itemName);
-  //       setCategory(response.data.category);
-  //       setQuery(itemName);
-
-  //       setIsDropdownOpen(false);
-  //       console.log(response.data)
-  //     })
-  //     .catch(error => {
-  //       console.error('API error: ', error);
-  //     });
-
-
-  // };
-
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionsActive, setSuggestionsActive] = useState(false);
@@ -121,7 +74,7 @@ function PurchaseTableRow({ index, PurchaserowData, updatedRowData, data, update
     setValue(query);
     if (query.length > 0) {
       // Make an API request to get suggestions
-      axios.get(`http://localhost:4001/api/suggestions?q=${query}`)
+      axios.get(`${API_URL}/api/suggestions?q=${query}`)
         .then((response) => {
           const filteredSuggestions = response.data.filter((suggestion) =>
             suggestion.toLowerCase().startsWith(query.charAt(0))
@@ -142,7 +95,7 @@ function PurchaseTableRow({ index, PurchaserowData, updatedRowData, data, update
     console.log('Clicked Item:', value);
 
     // Make an Axios GET request to fetch item data
-    axios.get(`http://localhost:4001/fetchItemData/${value}`)
+    axios.get(`${API_URL}/fetchItemData/${value}`)
       .then((response) => {
         // Handle the response data as needed
         const itemData = response.data;
@@ -183,7 +136,7 @@ function PurchaseTableRow({ index, PurchaserowData, updatedRowData, data, update
 
         setSuggestions([]);
         setSuggestionsActive(false);
-        axios.get(`http://localhost:4001/fetchItemData/${selectedSuggestion}`)
+        axios.get(`${API_URL}/fetchItemData/${selectedSuggestion}`)
           .then((response) => {
             // Handle the response data as needed
             const itemData = response.data;

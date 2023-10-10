@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../services/api';
 
 import arrowIcon from '../icon/icons8-arrow-28.png'
+import { API_URL } from '../config/config';
+
 
 function Userlist() {
     const [userlist, setUserlist] = useState([]);
@@ -20,7 +22,7 @@ function Userlist() {
 
     useEffect(() => {
       // Make the API request when the component mounts
-      axios.get('http://localhost:4001/fetchuser')
+      axios.get(`${API_URL}/fetchuser`)
         .then(response => {
           // Handle the response by setting the data in state
           setUserlist(response.data);
