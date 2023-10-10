@@ -113,7 +113,7 @@ app.post('/login', async (req, res) => {
 
   try {
     // Check if the username exists in the database using the promise-based version
-    const [results] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+    const [results] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
 
     if (results.length === 0) {
       return res.status(401).json({ error: 'Username not found' });
