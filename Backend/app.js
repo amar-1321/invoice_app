@@ -112,8 +112,8 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Check if the username exists in the database
-    const results = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+    // Check if the username exists in the database using the promise-based version
+    const [results] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
 
     if (results.length === 0) {
       return res.status(401).json({ error: 'Username not found' });
@@ -129,7 +129,7 @@ app.post('/login', async (req, res) => {
     const isAdmin = user.isAdmin;
 
     // If username and password are correct, create and return a JWT token
-    const token = jwt.sign({ userId: user.id, isAdmin }, 'your-secret-key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id, isAdmin },  SECRET_KEY, { expiresIn: '1h' });
 
     res.status(200).json({ token, isAdmin });
   } catch (error) {
@@ -137,6 +137,7 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Login failed' });
   }
 });
+
 
 app.put('/userupdate/:id', (req, res) => {
   const messageId = req.params.id;
