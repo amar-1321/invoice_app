@@ -26,7 +26,10 @@ const db = mysql.createConnection({
 
 
 });
-
+if (db.state === 'disconnected') {
+  console.error('Connection is closed. Reconnecting...');
+  db.connect();
+}
 
 
   db.connect(err => {
