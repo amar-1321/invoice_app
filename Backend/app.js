@@ -108,12 +108,21 @@ app.post('/register', (req, res) => {
 //     db.end();
 //   });
 // });
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
 
+app.post('/login', async (req, res) => {
   try {
-    // Check if the username exists in the database using the promise-based version
-    const [results] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+    const { username, password } = req.body;
+
+    // Check if the username exists in the database
+    const results = await new Promise((resolve, reject) => {
+      db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
 
     if (results.length === 0) {
       return res.status(401).json({ error: 'Username not found' });
@@ -121,7 +130,7 @@ app.post('/login', async (req, res) => {
 
     const user = results[0];
 
-    // Compare the provided password with the stored password (plain text)
+    // Check if the provided password matches the stored password (you should use a proper password hashing library here)
     if (password !== user.password) {
       return res.status(401).json({ error: 'Invalid password' });
     }
@@ -129,14 +138,16 @@ app.post('/login', async (req, res) => {
     const isAdmin = user.isAdmin;
 
     // If username and password are correct, create and return a JWT token
-    const token = jwt.sign({ userId: user.id, isAdmin },  SECRET_KEY, { expiresIn: '1h' });
-
+    const token = jwt.sign({ userId: user.id, isAdmin }, SECRET_KEY, { expiresIn: '1h' });
     res.status(200).json({ token, isAdmin });
-  } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).json({ error: 'Login failed' });
+
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  } finally {
+    db.end();
   }
 });
+
 
 
 app.put('/userupdate/:id', (req, res) => {
