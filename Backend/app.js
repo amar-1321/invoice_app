@@ -73,7 +73,7 @@ app.post('/register', (req, res) => {
       // Create and return a JWT token for the newly registered user
       const token = jwt.sign({ userId: insertResults.insertId, isAdmin }, 'your-secret-key', { expiresIn: '1h' });
       res.status(201).json({ token });
-      
+       db.end();
     });
   });
 });
@@ -123,6 +123,7 @@ app.put('/userupdate/:id', (req, res) => {
     } else {
       console.log('Data updated in MySQL');
       res.send('Data updated successfully');
+       db.end();
     }
   });
 });
@@ -140,6 +141,7 @@ app.delete('/userdelete/:id', (req, res) => {
     } else {
       console.log('Data deleted from MySQL');
       res.send('Data deleted successfully');
+       db.end();
     }
   });
 });
@@ -212,6 +214,7 @@ app.post('/addproduct', (req, res) => {
         } else {
           console.log('Data inserted into MySQL');
           res.send('Data inserted successfully');
+           db.end();
         }
       });
     }
@@ -230,6 +233,7 @@ app.get('/fetchProduct', (req, res) => {
         return;
       }
       res.json(result);
+       db.end();
     });
   });
 
@@ -246,6 +250,7 @@ app.get('/fetchProduct', (req, res) => {
       } else {
         console.log('Data updated in MySQL');
         res.send('Data updated successfully');
+         db.end();
       }
     });
   });
@@ -264,6 +269,7 @@ app.get('/fetchProduct', (req, res) => {
       } else {
         console.log('Data deleted from MySQL');
         res.send('Data deleted successfully');
+         db.end();
       }
     });
   });
@@ -282,6 +288,7 @@ app.get('/fetchProduct', (req, res) => {
       if (err) throw err;
       console.log(`Checkbox for row with ID ${id} toggled to ${isChecked ? 'checked' : 'unchecked'}`);
       res.json({ success: true });
+       db.end();
     });
   });
   
@@ -301,6 +308,7 @@ app.post('/addcustomer', (req, res) => {
     } else {
       console.log('Data inserted into MySQL');
       res.send('Data inserted successfully');
+       db.end();
     }
   });
 });
@@ -316,6 +324,7 @@ app.get('/fetchCustomer', (req, res) => {
       return;
     }
     res.json(result);
+     db.end();
   });
 });
 
@@ -333,6 +342,7 @@ app.put('/updateCustomer/:id', (req, res) => {
     } else {
       console.log('Data updated in MySQL');
       res.send('Data updated successfully');
+       db.end();
     }
   });
 });
@@ -351,6 +361,7 @@ app.delete('/deleteCustomer/:id', (req, res) => {
     } else {
       console.log('Data deleted from MySQL');
       res.send('Data deleted successfully');
+       db.end();
     }
   });
 });
@@ -366,6 +377,7 @@ app.get('/fetch/cust_name', (req, res) => {
     } else {
       const dropdownData = results.map((row) => row.cus_name); // Use 'cus_name' here
       res.json(dropdownData);
+       db.end();
     }
   });
 });
@@ -385,6 +397,7 @@ app.get('/fetchCustData/:name', (req, res) => {
       } else {
         const custData = results[0];
         res.json(custData);
+         db.end();
       }
     }
   });
@@ -405,6 +418,7 @@ app.get('/fetchCustData/:name', (req, res) => {
       } else {
         console.log('Data inserted into MySQL');
         res.send('Data inserted successfully');
+         db.end();
       }
     });
   });
@@ -420,6 +434,7 @@ app.get('/fetchCustData/:name', (req, res) => {
       } else {
         const dropdownData = results.map((row) => row.bfullName);
         res.json(dropdownData);
+         db.end();
       }
     });
   });
@@ -436,6 +451,7 @@ app.get('/fetchCustData/:name', (req, res) => {
       } else {
      
         res.json(results);
+         db.end();
       }
     });
   });
@@ -454,6 +470,7 @@ app.get('/fetchCustData/:name', (req, res) => {
       } else {
         console.log('Data updated in MySQL');
         res.send('Data updated successfully');
+         db.end();
       }
     });
   });
@@ -470,6 +487,7 @@ app.get('/fetchCustData/:name', (req, res) => {
       } else {
         console.log('Data deleted from MySQL');
         res.send('Data deleted successfully');
+         db.end();
       }
     });
   });
@@ -493,6 +511,7 @@ db.query(query, [userInput], (err, results) => {
     }
 
     res.status(200).json({ data: results });
+   db.end();
 
     // No need to manually close the database connection here
   });
@@ -515,6 +534,7 @@ app.get('/api/suggestions', (req, res) => {
     }
     const itemName = results.map((row) => row.itemName);
     res.json(itemName);
+     db.end();
   });
 });
 
@@ -535,6 +555,7 @@ app.get("/fetchItemData/:itemName", (req, res) => {
       } else {
         const itemData = results[0];
         res.json(itemData);
+         db.end();
       }
     }
   });
@@ -554,6 +575,7 @@ app.post('/addcategory', (req, res) => {
     } else {
       console.log('Data inserted into MySQL');
       res.send('Data inserted successfully');
+       db.end();
     }
   });
 });
@@ -571,6 +593,7 @@ app.get('/fetchcategory', (req, res) => {
       return;
     }
     res.json(result);
+     db.end();
   });
 });
 
@@ -587,6 +610,7 @@ app.put('/updatecategory/:id', (req, res) => {
     } else {
       console.log('Data updated in MySQL');
       res.send('Data updated successfully');
+       db.end();
     }
   });
 });
@@ -605,6 +629,7 @@ app.delete('/deletecategory/:id', (req, res) => {
     } else {
       console.log('Data deleted from MySQL');
       res.send('Data deleted successfully');
+       db.end();
     }
   });
 });
@@ -770,6 +795,7 @@ app.post('/purchase', async (req, res) => {
   
 
     res.status(200).json({ message: 'Purchase data and stock updates saved successfully' });
+     db.end();
   } catch (error) {
     console.error('Error saving data:', error.message);
     res.status(500).json({ error: 'Error saving data' });
@@ -926,6 +952,7 @@ app.post('/billEntey', async (req, res) => {
     }
 
     res.status(200).json({ message: 'bill data and stock updates saved successfully' });
+     db.end();
   } catch (error) {
     console.error('Error saving data:', error.message);
     res.status(500).json({ error: 'Error saving data' });
@@ -1051,6 +1078,7 @@ app.get('/fetchBillWise', (req, res) => {
       return;
     }
     res.json(result);
+     db.end();
   });
 });
 
@@ -1065,6 +1093,7 @@ app.get('/fetchBillWise', (req, res) => {
       return;
     }
     res.json(result);
+     db.end();
   });
 });
 
@@ -1078,6 +1107,7 @@ app.get('/fetchStockViewData', (req, res) => {
       return;
     }
     res.json(result);
+     db.end();
   });
 });
 
@@ -1090,6 +1120,7 @@ app.get('/fetchStockHistoryData', (req, res) => {
       return;
     }
     res.json(result);
+     db.end();
   });
 });
 
@@ -1114,6 +1145,7 @@ app.get('/api/billDataview', (req, res) => {
 
     // Send the sales results as a JSON response
     res.json(salesResults);
+     db.end();
   });
 });
 
@@ -1140,6 +1172,7 @@ app.get('/api/search', (req, res) => {
     }
     // Send the results as JSON
     res.json(results);
+     db.end();
   });
 
 
@@ -1159,6 +1192,7 @@ app.get('/machinePrice', (req, res) => {
    }
    // Send the results as JSON
    res.json(results);
+     db.end();
  });
 
 })
@@ -1269,6 +1303,7 @@ for (let index = 0; index < values2.length; index++) {
 }
 
 res.status(200).json({ message: 'bill data and stock updates saved successfully' });
+   db.end();
 
 
 });
