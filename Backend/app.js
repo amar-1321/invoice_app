@@ -82,14 +82,38 @@ app.post('/register', (req, res) => {
 
 // Login
 
-app.post('/login', (req, res) => {
+// app.post('/login', (req, res) => {
+//   const { username, password } = req.body;
+
+//   // Check if the username exists in the database
+//   db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+//     if (err) {
+//       return res.status(500).json({ error: err.message });
+//     }
+
+//     if (results.length === 0) {
+//       return res.status(401).json({ error: 'Username not found' });
+//     }
+
+//     const user = results[0];
+
+//     // Check if the provided password matches the stored password (you should use a proper password hashing library here)
+//     if (password !== user.password) {
+//       return res.status(401).json({ error: 'Invalid password' });
+//     }
+//      const isAdmin = user.isAdmin;
+//     // If username and password are correct, create and return a JWT token
+//     const token = jwt.sign({ userId: user.id, isAdmin }, SECRET_KEY, { expiresIn: '1h' });
+//     res.status(200).json({ token, isAdmin});
+//     db.end();
+//   });
+// });
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  // Check if the username exists in the database
-  db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
+  try {
+    // Check if the username exists in the database
+    const results = await db.query('SELECT * FROM users WHERE username = ?', [username]);
 
     if (results.length === 0) {
       return res.status(401).json({ error: 'Username not found' });
@@ -97,18 +121,22 @@ app.post('/login', (req, res) => {
 
     const user = results[0];
 
-    // Check if the provided password matches the stored password (you should use a proper password hashing library here)
+    // Compare the provided password with the stored password (plain text)
     if (password !== user.password) {
       return res.status(401).json({ error: 'Invalid password' });
     }
-     const isAdmin = user.isAdmin;
-    // If username and password are correct, create and return a JWT token
-    const token = jwt.sign({ userId: user.id, isAdmin }, SECRET_KEY, { expiresIn: '1h' });
-    res.status(200).json({ token, isAdmin});
-    db.end();
-  });
-});
 
+    const isAdmin = user.isAdmin;
+
+    // If username and password are correct, create and return a JWT token
+    const token = jwt.sign({ userId: user.id, isAdmin }, 'your-secret-key', { expiresIn: '1h' });
+
+    res.status(200).json({ token, isAdmin });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Login failed' });
+  }
+});
 
 app.put('/userupdate/:id', (req, res) => {
   const messageId = req.params.id;
