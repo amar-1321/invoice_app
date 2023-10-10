@@ -23,20 +23,14 @@ const db = mysql.createConnection({
   user: process.env.DB_USERNAME,     
   password: process.env.DB_PASSWORD,  
   database: process.env.DB, 
-
-
 });
-if (db.state === 'disconnected') {
-  console.error('Connection is closed. Reconnecting...');
-  db.connect();
-}
-
 
   db.connect(err => {
     if (err) {
       console.error('Error connecting to MySQL:', err);
     } else {
       console.log('Connected to MySQL database');
+ 
     }
   });
 
@@ -73,7 +67,7 @@ app.post('/register', (req, res) => {
       // Create and return a JWT token for the newly registered user
       const token = jwt.sign({ userId: insertResults.insertId, isAdmin }, 'your-secret-key', { expiresIn: '1h' });
       res.status(201).json({ token });
-       db.end();
+    
     });
   });
 });
@@ -82,46 +76,14 @@ app.post('/register', (req, res) => {
 
 // Login
 
-// app.post('/login', (req, res) => {
-//   const { username, password } = req.body;
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
 
-//   // Check if the username exists in the database
-//   db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
-//     if (err) {
-//       return res.status(500).json({ error: err.message });
-//     }
-
-//     if (results.length === 0) {
-//       return res.status(401).json({ error: 'Username not found' });
-//     }
-
-//     const user = results[0];
-
-//     // Check if the provided password matches the stored password (you should use a proper password hashing library here)
-//     if (password !== user.password) {
-//       return res.status(401).json({ error: 'Invalid password' });
-//     }
-//      const isAdmin = user.isAdmin;
-//     // If username and password are correct, create and return a JWT token
-//     const token = jwt.sign({ userId: user.id, isAdmin }, SECRET_KEY, { expiresIn: '1h' });
-//     res.status(200).json({ token, isAdmin});
-//     db.end();
-//   });
-// });
-
-app.post('/login', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    const results = await new Promise((resolve, reject) => {
-      db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(results);
-        }
-      });
-    });
+  // Check if the username exists in the database
+  db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
 
     if (results.length === 0) {
       return res.status(401).json({ error: 'Username not found' });
@@ -133,17 +95,14 @@ app.post('/login', async (req, res) => {
     if (password !== user.password) {
       return res.status(401).json({ error: 'Invalid password' });
     }
-
-    const isAdmin = user.isAdmin;
-
+     const isAdmin = user.isAdmin;
     // If username and password are correct, create and return a JWT token
     const token = jwt.sign({ userId: user.id, isAdmin }, SECRET_KEY, { expiresIn: '1h' });
-    res.status(200).json({ token, isAdmin });
-
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
-  } 
+    res.status(200).json({ token, isAdmin});
+    db.end();
+  });
 });
+
 
 
 
@@ -1345,6 +1304,11 @@ res.status(200).json({ message: 'bill data and stock updates saved successfully'
 
 
 });
+
+     if (db.state === 'disconnected') {
+  console.error('Connection is closed. Reconnecting...');
+  db.connect();
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
